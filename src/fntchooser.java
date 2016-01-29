@@ -30,10 +30,19 @@ public class fntchooser extends JComboBox {
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	      String[] names = ge.getAvailableFontFamilyNames();
 	      JComboBox fonts = new JComboBox(names);
-	      JFrame frame = new JFrame("Font Type");
+	      JPanel panela = new JPanel();
+	      JLabel labela = new JLabel("Select a font");
+	      panela.add(labela);
+	      panela.add(fonts);
+	      JButton button = new JButton ("Set font");
+	      JButton button1 = new JButton ("Preview font");
+	      JFrame frame = new JFrame("Text changer");
+	      frame.setLayout(new FlowLayout());
+	      frame.add(panela);
+	      frame.add(button1);
+	      frame.add(button);
 	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-          frame.add(fonts, BorderLayout.NORTH);
-	      frame.setSize(900, 900);
+	      frame.setSize(600, 250);
 	      frame.setVisible(true);
 	}
 }
