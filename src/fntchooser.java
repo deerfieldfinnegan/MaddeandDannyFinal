@@ -51,10 +51,6 @@ public class fntchooser extends JComboBox {
 	      JPanel panelz = new JPanel();
 	      panelz.add(labela);
 	      panelz.add(fonts);
-	      JCheckBox Bold = new JCheckBox("Bold");
-	      JCheckBox Italic = new JCheckBox("Italic");
-	      panelz.add(Bold);
-	      panelz.add(Italic);
           String outputText = "<html>"
 	  			+ "The quick brown fox jumped over the lazy dog’s back.<br>"
 	  			+ "Pack my box with five dozen liquor jugs.<br>"
@@ -115,8 +111,7 @@ public class fntchooser extends JComboBox {
 	          output_Text.setForeground(fc);      }
 	      };
 	      fontcolorchooser.addChangeListener(fontchangeListener);
-	  
-
+	      
 	      
 	      }
 	}
