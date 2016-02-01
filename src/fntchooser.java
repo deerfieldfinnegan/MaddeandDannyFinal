@@ -10,6 +10,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.SwingUtilities;
+import javax.swing.colorchooser.ColorSelectionModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.ComboPopup;
@@ -45,7 +48,6 @@ public class fntchooser extends JComboBox {
 	    	}
 	      yes123.setCellRenderer(new FontCellRenderer());
 	      JLabel labela = new JLabel("Select a font");
-	      JPanel panelb = new JPanel();
 	      JPanel panelz = new JPanel();
 	      panelz.add(labela);
 	      panelz.add(fonts);
@@ -79,7 +81,6 @@ public class fntchooser extends JComboBox {
 	      panela.addTab("Text Color", font);
 	      panela.addTab("Background Color", background);
 	      JFrame frame = new JFrame("Text changer");
-	      panelb.setSize(new Dimension(300, 150));
 	      button3.setSize(new Dimension(500, 300));
 	      button4.setSize(new Dimension(500, 300));
 	      frame.setLayout(new FlowLayout());
@@ -95,6 +96,23 @@ public class fntchooser extends JComboBox {
 	  	    	  output_Text.setFont(new Font(select,Font.PLAIN, 12));
 	  	      }
 	  	    });
+	      ColorSelectionModel backgroundcolor = background.getSelectionModel();
+	      ChangeListener backgroundchangeListener = new ChangeListener() {
+	        public void stateChanged(ChangeEvent changeEvent) {
+	          Color bgroundcolor = background.getColor();
+	          output_Text.setBackground(bgroundcolor);
+	        }
+	      };
+	     backgroundcolor.addChangeListener(backgroundchangeListener);
+	      
+	      ColorSelectionModel fontcolorchooser = font.getSelectionModel();
+	      ChangeListener fontchangeListener = new ChangeListener() {
+	        public void stateChanged(ChangeEvent changeEvent) {
+	          Color fc = font.getColor();
+	          output_Text.setForeground(fc);      }
+	      };
+	      fontcolorchooser.addChangeListener(fontchangeListener);
+	  
 
 	      
 	      }
