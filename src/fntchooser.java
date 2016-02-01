@@ -71,8 +71,10 @@ public class fntchooser extends JComboBox {
 	  			+ "</html>";
 	  	  JLabel output_Text = new JLabel (outputText,JLabel.CENTER);
           JFrame preview = new JFrame ();
-          preview.add(output_Text);
-	  	  JButton button3 = new JButton ("Text Color");
+          JPanel preview1 = new JPanel ();
+          preview1.add(output_Text);
+          preview.add(preview1);
+          JButton button3 = new JButton ("Text Color");
 	      JButton button4 = new JButton ("Background Color");
 	      JTabbedPane panela = new JTabbedPane();
 	      JColorChooser font = new JColorChooser();
@@ -89,6 +91,7 @@ public class fntchooser extends JComboBox {
 	      frame.setSize(750, 500);
 	      frame.setVisible(true);
 	      preview.setSize(500, 500);
+	      output_Text.setBackground(Color.WHITE);
 	      preview.setVisible(true);
 	      yes123.addListSelectionListener(new ListSelectionListener() {
 	  	      public void valueChanged(ListSelectionEvent e) {
@@ -98,16 +101,16 @@ public class fntchooser extends JComboBox {
 	  	    });
 	      ColorSelectionModel backgroundcolor = background.getSelectionModel();
 	      ChangeListener backgroundchangeListener = new ChangeListener() {
-	        public void stateChanged(ChangeEvent changeEvent) {
+	        public void stateChanged(ChangeEvent a) {
 	          Color bgroundcolor = background.getColor();
-	          output_Text.setBackground(bgroundcolor);
+	          preview1.setBackground(bgroundcolor);
 	        }
 	      };
 	     backgroundcolor.addChangeListener(backgroundchangeListener);
 	      
 	      ColorSelectionModel fontcolorchooser = font.getSelectionModel();
 	      ChangeListener fontchangeListener = new ChangeListener() {
-	        public void stateChanged(ChangeEvent changeEvent) {
+	        public void stateChanged(ChangeEvent a) {
 	          Color fc = font.getColor();
 	          output_Text.setForeground(fc);      }
 	      };
