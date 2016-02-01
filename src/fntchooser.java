@@ -10,6 +10,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,8 +27,8 @@ public class fntchooser extends JComboBox {
 	
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	      String[] names = ge.getAvailableFontFamilyNames();
-	      JList fuckyou = new JList(names);
-	      JScrollPane fonts = new JScrollPane(fuckyou);
+	      JList yes123 = new JList(names);
+	      JScrollPane fonts = new JScrollPane(yes123);
 	      class FontCellRenderer extends DefaultListCellRenderer {
 	    	    public Component getListCellRendererComponent(
 	    	        JList list,
@@ -41,19 +43,17 @@ public class fntchooser extends JComboBox {
 	    	        return label;
 	    	    }
 	    	}
-	      fuckyou.setCellRenderer(new FontCellRenderer());
+	      yes123.setCellRenderer(new FontCellRenderer());
 	      JLabel labela = new JLabel("Select a font");
 	      JPanel panelb = new JPanel();
 	      JPanel panelz = new JPanel();
 	      panelz.add(labela);
 	      panelz.add(fonts);
-	      panelb.setLayout(new GridLayout(0,1));
 	      JCheckBox Bold = new JCheckBox("Bold");
 	      JCheckBox Italic = new JCheckBox("Italic");
-	      panelb.add(Bold);
-	      panelb.add(Italic);
-          panelz.add(panelb);
-	      String outputText = "<html>"
+	      panelz.add(Bold);
+	      panelz.add(Italic);
+          String outputText = "<html>"
 	  			+ "The quick brown fox jumped over the lazy dog’s back.<br>"
 	  			+ "Pack my box with five dozen liquor jugs.<br>"
 	  			+ "Jackdaws love my big sphinx of quartz.<br>"
@@ -67,8 +67,10 @@ public class fntchooser extends JComboBox {
 	  			+ "!\"#$%&\'()*+,-./:;<=>?@[\\^_z{|}~<br>"
 	  			+ "uvw wW gq9 2z 5s il17|!j oO08 `'\" ;:,. m nn rn {[()]}u<br>"
 	  			+ "</html>";
-	  	JLabel output_Text = new JLabel (outputText,JLabel.CENTER);
-          JButton button3 = new JButton ("Text Color");
+	  	  JLabel output_Text = new JLabel (outputText,JLabel.CENTER);
+          JFrame preview = new JFrame ();
+          preview.add(output_Text);
+	  	  JButton button3 = new JButton ("Text Color");
 	      JButton button4 = new JButton ("Background Color");
 	      JTabbedPane panela = new JTabbedPane();
 	      JColorChooser font = new JColorChooser();
@@ -82,10 +84,17 @@ public class fntchooser extends JComboBox {
 	      button4.setSize(new Dimension(500, 300));
 	      frame.setLayout(new FlowLayout());
 	      frame.add(panela);
-	      frame.add(output_Text);
 	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	      frame.setSize(1000, 700);
+	      frame.setSize(750, 500);
 	      frame.setVisible(true);
+	      preview.setSize(500, 500);
+	      preview.setVisible(true);
+	      yes123.addListSelectionListener(new ListSelectionListener() {
+	  	      public void valueChanged(ListSelectionEvent e) {
+	  	    	  String select = yes123.getSelectedValue().toString();
+	  	    	  output_Text.setFont(new Font(select,Font.PLAIN, 12));
+	  	      }
+	  	    });
 
 	      
 	      }
