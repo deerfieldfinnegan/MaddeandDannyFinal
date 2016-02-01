@@ -25,27 +25,70 @@ public class fntchooser extends JComboBox {
 	
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	      String[] names = ge.getAvailableFontFamilyNames();
-	      JComboBox fonts = new JComboBox(names);
+	      JList fuckyou = new JList(names);
+	      JScrollPane fonts = new JScrollPane(fuckyou);
+	      class FontCellRenderer extends DefaultListCellRenderer {
+	    	    public Component getListCellRendererComponent(
+	    	        JList list,
+	    	        Object value,
+	    	        int index,
+	    	        boolean isSelected,
+	    	        boolean cellHasFocus) {
+	    	        JLabel label = (JLabel)super.getListCellRendererComponent(
+	    	            list,value,index,isSelected,cellHasFocus);
+	    	        Font font = new Font((String)value, Font.PLAIN, 16);
+	    	        label.setFont(font);
+	    	        return label;
+	    	    }
+	    	}
+	      fuckyou.setCellRenderer(new FontCellRenderer());
 	      JLabel labela = new JLabel("Select a font");
 	      JPanel panelb = new JPanel();
-	      panelb.add(labela);
-	      panelb.add(fonts);
-	      JButton button = new JButton ("Set font");
-	      panelb.add(button);
-	      JButton button3 = new JButton ("Text Color");
+	      JPanel panelz = new JPanel();
+	      panelz.add(labela);
+	      panelz.add(fonts);
+	      panelb.setLayout(new GridLayout(0,1));
+	      JCheckBox Bold = new JCheckBox("Bold");
+	      JCheckBox Italic = new JCheckBox("Italic");
+	      panelb.add(Bold);
+	      panelb.add(Italic);
+          panelz.add(panelb);
+	      String outputText = "<html>"
+	  			+ "The quick brown fox jumped over the lazy dog’s back.<br>"
+	  			+ "Pack my box with five dozen liquor jugs.<br>"
+	  			+ "Jackdaws love my big sphinx of quartz.<br>"
+	  			+ "Mr. Jock, TV quiz PhD, bags few lynx.<br>"
+	  			+ "abcdefghijklmnopqrstuvwxyz<br>"
+	  			+ "ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>"
+	  			+ "01234567890<br>"
+	  			+ "€†™´¸¢©¤°÷½¼¾>¡¿«‘’<¯µ ·¬ªº¶±£\"»®§­¹²³ß×™¨¥<br>"
+	  			+ "ÀÁÂÃÄÅÆÇÈÉ ÊËÌÍÎÏÐÑÒÓÔ ÕÖØÙÚÛÜÝÞÿ<br>"
+	  			+ "àáâãäåæçèé êëìíîïðñòóô õöøùúûüýþÿ<br>"
+	  			+ "!\"#$%&\'()*+,-./:;<=>?@[\\^_z{|}~<br>"
+	  			+ "uvw wW gq9 2z 5s il17|!j oO08 `'\" ;:,. m nn rn {[()]}u<br>"
+	  			+ "</html>";
+	  	JLabel output_Text = new JLabel (outputText,JLabel.CENTER);
+          JButton button3 = new JButton ("Text Color");
 	      JButton button4 = new JButton ("Background Color");
 	      JTabbedPane panela = new JTabbedPane();
-	      panela.addTab("Fonts", panelb);
-	      panela.addTab("Text Color", button3);
-	      panela.addTab("Background Color", button4);
-	      JTextField text = new JTextField(20);
+	      JColorChooser font = new JColorChooser();
+	      JColorChooser background = new JColorChooser();
+	      panela.addTab("Fonts", panelz);
+	      panela.addTab("Text Color", font);
+	      panela.addTab("Background Color", background);
 	      JFrame frame = new JFrame("Text changer");
+	      panelb.setSize(new Dimension(300, 150));
+	      button3.setSize(new Dimension(500, 300));
+	      button4.setSize(new Dimension(500, 300));
 	      frame.setLayout(new FlowLayout());
 	      frame.add(panela);
-	      frame.add(text);
+	      frame.add(output_Text);
 	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	      frame.setSize(600, 250);
+	      frame.setSize(1000, 700);
 	      frame.setVisible(true);
+
+	      
+	      }
 	}
-}
+
 	      
